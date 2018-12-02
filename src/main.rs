@@ -2,7 +2,6 @@ use std::io::Read;
 use std::fs::File;
 mod disassembler;
 use std::env;
-
 fn main() {
     let path = match env::current_dir() {
         Ok(path) => format!("{}/example_c/a.out", path.display()),

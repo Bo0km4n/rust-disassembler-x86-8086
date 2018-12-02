@@ -1,5 +1,6 @@
 use std::vec::Vec;
 pub fn start(input: Vec<u8>) {
+    hoge::fuga();
     let mut da: DisAssembler8086 = DisAssembler::new(input);
     println!("{:?}", da.body);
     da.dump_cur_token();
@@ -13,8 +14,8 @@ pub fn start(input: Vec<u8>) {
 
 struct DisAssembler8086 {
     body: Vec<u8>,
-    curToken: u8,
-    curPosition: usize,
+    cur_token: u8,
+    cur_position: usize,
 }
 
 trait DisAssembler {
@@ -27,22 +28,24 @@ trait DisAssembler {
 
 impl DisAssembler for DisAssembler8086 {
     fn new(input: Vec<u8>) -> DisAssembler8086 {
-        let curToken = input[0];
-        DisAssembler8086{body: input, curToken: curToken, curPosition: 0}
+        let cur_token = input[0];
+        DisAssembler8086{body: input, cur_token: cur_token, cur_position: 0}
     }
+
     fn next(&mut self) {
-        self.curPosition += 1;
-        self.curToken = self.body[self.curPosition];
+        self.cur_position += 1;
+        self.cur_token = self.body[self.cur_position];
     }
+    
     fn peek_token(&mut self) -> u8 {
-        return self.body[self.curPosition+1];
+        return self.body[self.cur_position+1];
     }
 
     fn dump_cur_token(&mut self) {
-        println!("current token: 0x{:<02x}", self.curToken);
+        println!("current token: 0x{:<02x}", self.cur_token);
     }
 
     fn is_end(&mut self) -> bool {
-       self.body.len() == self.curPosition+1
+       self.body.len() == self.cur_position+1
     }
 }
