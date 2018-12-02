@@ -16,7 +16,7 @@ fn main() {
     };
     let mut buf = vec![];
     match f.read_to_end(&mut buf) {
-        Ok(_) => disassembler::reader::read(buf),
+        Ok(_) => disassembler::reader::start(buf),
         Err(error) => {
             panic!("{:?}", error)
         }
