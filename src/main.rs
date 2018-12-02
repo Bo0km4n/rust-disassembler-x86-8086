@@ -1,10 +1,14 @@
-use std::io::{self, Read};
+use std::io::Read;
 use std::fs::File;
 mod disassembler;
-fn main() {
-    println!("hello world");
+use std::env;
 
-    let mut f = match File::open("/Users/bo0km4n/dev/rust/monkey-rs/example_c/a.out") {
+fn main() {
+    let path = match env::current_dir() {
+        Ok(path) => format!("{}/example_c/a.out", path.display()),
+        Err(err) => panic!("{:?}", err)
+    };
+    let mut f = match File::open(path) {
         Ok(file) => file,
         Err(error) => {
             panic!("{:?}", error)
