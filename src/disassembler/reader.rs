@@ -1,6 +1,5 @@
 use std::vec::Vec;
 pub fn start(input: Vec<u8>) {
-    hoge::fuga();
     let mut da: DisAssembler8086 = DisAssembler::new(input);
     println!("{:?}", da.body);
     da.dump_cur_token();
