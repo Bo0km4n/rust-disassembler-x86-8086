@@ -1,7 +1,13 @@
 use std::vec::Vec;
+use super::evaluator;
+
 pub fn start(input: Vec<u8>) {
     let mut da: DisAssembler8086 = DisAssembler::new(input);
     println!("{:?}", da.body);
+    let fns = evaluator::build_eval_fns();
+    let fnc = fns.get(&0x30);
+    println!("{:?}", &fnc);
+
     da.dump_cur_token();
     da.next();
     da.dump_cur_token();
