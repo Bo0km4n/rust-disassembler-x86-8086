@@ -1,7 +1,6 @@
 use std::collections::HashMap;
-mod instructions;
-use self::instructions::xor;
-
+mod xor;
+// use self::xor;
 
 pub fn build_eval_fns() -> HashMap<u8, fn()> {
     let mut evaluator_fns: HashMap<u8, fn()> = HashMap::new();
