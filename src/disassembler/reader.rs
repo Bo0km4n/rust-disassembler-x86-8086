@@ -38,8 +38,8 @@ pub trait DisAssembler {
 
 impl DisAssembler for DisAssembler8086 {
     fn new(input: Vec<u8>) -> DisAssembler8086 {
-        let cur_token = input[0];
-        DisAssembler8086{body: input, cur_token: cur_token, cur_position: 0}
+        let cur_token = input[32];
+        DisAssembler8086{body: input, cur_token: cur_token, cur_position: 32}
     }
 
     fn next(&mut self) {
