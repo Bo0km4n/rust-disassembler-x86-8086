@@ -17,6 +17,6 @@ impl Error for InvalidOperationCode {
 
 impl fmt::Display for InvalidOperationCode {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "InvalidaOperationCode error")
+        write!(f, "InvalidaOperationCode error operand code=0x{:02x}", &self.op)
     }
 }
