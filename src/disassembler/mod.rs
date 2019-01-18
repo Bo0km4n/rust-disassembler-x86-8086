@@ -1,2 +1,3 @@
-pub mod reader;
+mod xor;
 mod evaluator;
+pub mod reader;

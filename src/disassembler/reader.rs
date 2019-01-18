@@ -1,13 +1,11 @@
 use std::vec::Vec;
 use super::evaluator;
-
 pub fn start(input: Vec<u8>) {
     let mut da: DisAssembler8086 = DisAssembler::new(input);
     println!("{:?}", da.body);
     let fns = evaluator::build_eval_fns();
     let fnc = fns.get(&0x30).unwrap();
-    println!("{:?}", &fnc);
-    fnc();
+    fnc(&mut da);
     
     da.dump_cur_token();
     da.next();
@@ -18,13 +16,13 @@ pub fn start(input: Vec<u8>) {
     da.dump_cur_token();
 }
 
-struct DisAssembler8086 {
+pub struct DisAssembler8086 {
     body: Vec<u8>,
     cur_token: u8,
     cur_position: usize,
 }
 
-trait DisAssembler {
+pub trait DisAssembler {
     fn new(input: Vec<u8>) -> Self;
     fn next(&mut self);
     fn peek_token(&mut self) -> u8;

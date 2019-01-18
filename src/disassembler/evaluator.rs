@@ -1,9 +1,9 @@
-use std::collections::HashMap;
-mod xor;
-// use self::xor;
 
-pub fn build_eval_fns() -> HashMap<u8, fn()> {
-    let mut evaluator_fns: HashMap<u8, fn()> = HashMap::new();
+use super::xor;
+use std::collections::HashMap;
+use super::reader::DisAssembler8086;
+pub fn build_eval_fns() -> HashMap<u8, fn(&mut DisAssembler8086)> {
+    let mut evaluator_fns: HashMap<u8, fn(&mut DisAssembler8086)> = HashMap::new();
     evaluator_fns.insert(0x30, xor::eval_xor_reg_mem);
     evaluator_fns.insert(0x31, xor::eval_xor_reg_mem);
     evaluator_fns.insert(0x32, xor::eval_xor_reg_mem);
