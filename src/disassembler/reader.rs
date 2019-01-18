@@ -3,9 +3,14 @@ use super::evaluator;
 pub fn start(input: Vec<u8>) {
     let mut da: DisAssembler8086 = DisAssembler::new(input);
     println!("{:?}", da.body);
-    let fns = evaluator::build_eval_fns();
-    let fnc = fns.get(&0x30).unwrap();
-    fnc(&mut da);
+    
+    let line = match evaluator::eval(&mut da) {
+        Ok(line) => println!("{}", line),
+        Err(err) => {
+            println!("{}", err);
+            return
+        },
+    };
     
     da.dump_cur_token();
     da.next();
@@ -28,6 +33,7 @@ pub trait DisAssembler {
     fn peek_token(&mut self) -> u8;
     fn dump_cur_token(&mut self);
     fn is_end(&mut self) -> bool;
+    fn cur_token(&self) -> u8;
 }
 
 impl DisAssembler for DisAssembler8086 {
@@ -51,5 +57,9 @@ impl DisAssembler for DisAssembler8086 {
 
     fn is_end(&mut self) -> bool {
        self.body.len() == self.cur_position+1
+    }
+
+    fn cur_token(&self) -> u8 {
+        return self.body[self.cur_position];
     }
 }
